@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TreeBinary } from './interface/tree.interface';
+export interface NodeData {
+	key : number,
+	childLeft?: number,
+	rightRight?: number
+}
 
 @Component({
   selector: 'app-root',
@@ -9,7 +13,9 @@ import { TreeBinary } from './interface/tree.interface';
 })
 export class AppComponent implements OnInit {
 
-	treeBinary : TreeBinary;
+	treeList : any[];
+
+	nodeList : NodeData[] = [];
   
   constructor() {}
 
@@ -19,64 +25,39 @@ export class AppComponent implements OnInit {
 
   	try {
 
-  		this.treeBinary = new TreeBinary();
+  		this.treeList = [
+				[1,4,5],
+				[2,5,6],
+				[3,6,7],
+				[4],
+				[5,8,9],
+				[6,9,10],
+				[7,10],
+				[8,11],
+				[9,11,12],
+				[10,12,13],
+				[11],
+				[12],
+				[13]
+		  ];
 
-  		// in orden
+		  this.treeList.forEach((item, index) => {
 
-  		// this.treeBinary.insert(4, 'Juan');
-  		// this.treeBinary.insert(7, 'Pedro');
-  		// this.treeBinary.insert(8, 'Maria');
-  		// this.treeBinary.insert(23, 'Julia');
-  		// this.treeBinary.insert(5, 'Miguel');
+		  	let nodeObj : NodeData = {
+		  		key: item[0],
+		  		childLeft: item.length > 1 ? item[1] : null,
+		  		rightRight: item.length === 3 ? item[2] : null
+		  	};
 
-  		// pre orden
+		  	this.nodeList.push(nodeObj);
+		  })
+
+		  console.log('node.list', this.nodeList);
   		
-  		this.treeBinary.insert(8, 'Juan');
-  		this.treeBinary.insert(3, 'Pedro');
-  		this.treeBinary.insert(1, 'Maria');
-  		this.treeBinary.insert(6, 'Julia');
-  		this.treeBinary.insert(4, 'Miguel');
-  		this.treeBinary.insert(7, 'Ana');
-  		this.treeBinary.insert(10, 'Ambar');
-  		this.treeBinary.insert(14, 'Leyla');
-  		this.treeBinary.insert(13, 'Keyla');
-  	
-
-  		// apply ready 
-  		
-  		//this.readyInOrden();
-  		this.readyPreOrden();
-
   	}catch(e) {
 
   		console.log('exception.handle', e);
   	}
   }
 
-  readyInOrden() : void {
-  	console.log('INIT - READY IN ORDEN');
-
-  	if (!this.treeBinary.treeIsEmpty()) {
-			this.treeBinary.readInOrden(this.treeBinary.root);
-		} else {
-			console.error('tree is empty');
-		}
-
-		console.log('FINISHED - READY IN ORDEN');
-  }
-
-  /**
-   * Root -  Left - Right (Raiz Izquierda Derecha)
-   *
-   * 
-   */
-  readyPreOrden() : void  {
-  	console.log('INIT - READY IN PRE ORDEN');  	
-  	if (!this.treeBinary.treeIsEmpty()) {
-			this.treeBinary.readInPreOrden(this.treeBinary.root);
-		} else {
-			console.error('tree is empty');
-		}
-  	console.log('FINISHED - READY IN PRE ORDEN');  	
-  }
 }

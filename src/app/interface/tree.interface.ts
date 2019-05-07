@@ -52,7 +52,7 @@ export class TreeBinary {
 		if (root!=null) {
 			this.readInOrden(root.leftChild);
 
-			console.log('node['+root.key+'] = ' + root.name, root); // mostramos el hijo izquierdo
+			console.log('node['+root.key+'] = ' + root.name, root);
 
 			this.readInOrden(root.rightChild);
 		}
@@ -61,10 +61,40 @@ export class TreeBinary {
 	readInPreOrden(root : NodeInterface) : void {
 
 		if (root!=null) {
-			console.log('node['+root.key+'] = ' + root.name, root); // mostramos el hijo izquierdo
+			console.log('node['+root.key+'] = ' + root.name, root);
 
 			this.readInPreOrden(root.leftChild);
 			this.readInPreOrden(root.rightChild);
 		}
+	}
+
+	readyInPostOrden(root : NodeInterface) : void {
+		if (root!=null) {
+			
+			this.readyInPostOrden(root.leftChild);
+			this.readyInPostOrden(root.rightChild);
+
+			console.log('node['+root.key+'] = ' + root.name, root);
+		}
+	}
+
+	searchNodeInTree(key : number) : NodeInterface {
+		
+		let auxNode : NodeInterface = this.root;
+
+		while(auxNode.key != key) {
+
+			if (key < auxNode.key) {
+				auxNode = auxNode.leftChild;
+			} else {
+				auxNode = auxNode.rightChild;
+			}
+
+			if (auxNode === null) {
+				return null;
+			}
+		}
+
+		return auxNode;
 	}
 }
