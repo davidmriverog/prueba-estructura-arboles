@@ -57,4 +57,14 @@ export class TreeBinary {
 			this.readInOrden(root.rightChild);
 		}
 	}
+
+	readInPreOrden(root : NodeInterface) : void {
+
+		if (root!=null) {
+			console.log('node['+root.key+'] = ' + root.name, root); // mostramos el hijo izquierdo
+
+			this.readInPreOrden(root.leftChild);
+			this.readInPreOrden(root.rightChild);
+		}
+	}
 }
