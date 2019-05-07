@@ -2,8 +2,17 @@ import { Component, OnInit } from '@angular/core';
 
 export interface NodeData {
 	key : number,
-	childLeft?: number,
-	rightRight?: number
+	child?: ChildNode[]
+}
+
+export enum Position {
+	LEFT = 'left',
+	RIGHT = 'right'
+}
+
+export interface ChildNode {
+	key : number,
+	position: Position
 }
 
 @Component({
@@ -50,7 +59,7 @@ export class AppComponent implements OnInit {
 		  this.findAncestors(12);
 
 		  // 2) Dado un número dado, encontrar sus hijos. (1, 6, 9, 11)
-		  
+
 
   	}catch(e) {
 
@@ -61,10 +70,25 @@ export class AppComponent implements OnInit {
   buildNodeList() : void {
   	this.treeList.forEach((item, index) => {
 
+  		let child : ChildNode[] = [];
+
+  		if(item.length > 1) {
+  			child.push({
+  				key: item[1],
+  				position: Position.LEFT
+  			});
+  		}
+
+  		if(item.length === 3) {
+  			child.push({
+  				key: item[2],
+  				position: Position.RIGHT
+  			});
+  		}
+
 	  	let nodeObj : NodeData = {
 	  		key: item[0],
-	  		childLeft: item.length > 1 ? item[1] : null,
-	  		rightRight: item.length === 3 ? item[2] : null
+	  		child: child
 	  	};
 
 	  	this.nodeList.push(nodeObj);
@@ -80,22 +104,32 @@ export class AppComponent implements OnInit {
 
   	let findAncestors : NodeData[] = this.nodeList.filter((item, index) => {
 
-  		return item.childLeft === key || item.rightRight === key;
+  		let checkChild = item.child.filter((child, idx) => {
+
+				return child.key === key;
+			});
+
+			return checkChild.length ? item : null;
   	});
 
   	if (!findAncestors.length) {
   		console.log('he '+key+' does not have ancestors');
   	} else {
-  		console.log('the Ancestors for ' + key + 'is: ', findAncestors);	
+
+  		let listKey = findAncestors.map(value => {
+  			return value.key;
+  		});
+
+  		console.log('the Ancestors for ' + key + ' is: '+listKey.join('->'));	
   	}
 
-  	console.log('FINISHED - FIND ANCESTORS['+key+']');
+  	console.log('FINISHED - FIND ANCESTORS for key ['+key+']');
 
   	return findAncestors;
   }
 
   findChildByKeyNode(key : number) : void {
-
+  	//
   }
 
 }
