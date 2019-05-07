@@ -15,8 +15,4 @@ export class NodeInterface {
 		this.leftChild = null;
 		this.rightChild = null;
 	}
-
-	completeNodeName() : string {
-		return this.key + "your data is :" + this.name;
-	}
 }

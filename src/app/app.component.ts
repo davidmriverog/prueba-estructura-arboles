@@ -21,14 +21,19 @@ export class AppComponent implements OnInit {
 
   		this.treeBinary = new TreeBinary();
 
-  		this.treeBinary.insert(1, 'prueba');
-  		this.treeBinary.insert(3, 'prueba');
-  		this.treeBinary.insert(2, 'prueba');
-  		this.treeBinary.insert(6, 'prueba');
-  		this.treeBinary.insert(8, 'prueba');
-  		this.treeBinary.insert(23, 'prueba');
+  		this.treeBinary.insert(4, 'Juan');
+  		this.treeBinary.insert(7, 'Pedro');
+  		this.treeBinary.insert(8, 'Maria');
+  		this.treeBinary.insert(23, 'Julia');
+  		this.treeBinary.insert(5, 'Miguel');
+  	
 
-  		console.log('arbol.list', this.treeBinary);
+  		// aplicamos recorrido inOrden
+  		if (!this.treeBinary.treeIsEmpty()) {
+  			this.treeBinary.readInOrden(this.treeBinary.root);
+  		} else {
+  			console.error('tree is empty');
+  		}
   	}catch(e) {
 
   		console.log('exception.handle', e);

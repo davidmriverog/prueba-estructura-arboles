@@ -44,6 +44,17 @@ export class TreeBinary {
 	}
 
 	treeIsEmpty() : boolean {
-		return false;
+		return this.root === null;
+	}
+
+	readInOrden(root : NodeInterface) : void {
+
+		if (root!=null) {
+			this.readInOrden(root.leftChild);
+
+			console.log('node['+root.key+'] = ' + root.name, root); // mostramos el hijo izquierdo
+
+			this.readInOrden(root.rightChild);
+		}
 	}
 }
