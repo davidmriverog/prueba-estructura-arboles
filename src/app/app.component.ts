@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ArbolBinario } from './interface/arbol.binario';
+import { TreeBinary } from './interface/tree.interface';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { ArbolBinario } from './interface/arbol.binario';
 })
 export class AppComponent implements OnInit {
 
-	arbolBinario : ArbolBinario;
+	treeBinary : TreeBinary;
   
   constructor() {}
 
@@ -19,16 +19,16 @@ export class AppComponent implements OnInit {
 
   	try {
 
-  		this.arbolBinario = new ArbolBinario();
+  		this.treeBinary = new TreeBinary();
 
-  		this.arbolBinario.insertNode(1, 'prueba');
-  		this.arbolBinario.insertNode(3, 'prueba');
-  		this.arbolBinario.insertNode(5, 'prueba');
-  		this.arbolBinario.insertNode(8, 'prueba');
-  		this.arbolBinario.insertNode(15, 'prueba');
-  		this.arbolBinario.insertNode(23, 'prueba');
+  		this.treeBinary.insert(1, 'prueba');
+  		this.treeBinary.insert(3, 'prueba');
+  		this.treeBinary.insert(2, 'prueba');
+  		this.treeBinary.insert(6, 'prueba');
+  		this.treeBinary.insert(8, 'prueba');
+  		this.treeBinary.insert(23, 'prueba');
 
-  		console.log('arbol.list', this.arbolBinario);
+  		console.log('arbol.list', this.treeBinary);
   	}catch(e) {
 
   		console.log('exception.handle', e);
