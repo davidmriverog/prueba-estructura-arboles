@@ -59,7 +59,10 @@ export class AppComponent implements OnInit {
 		  this.findAncestors(12);
 
 		  // 2) Dado un número dado, encontrar sus hijos. (1, 6, 9, 11)
-
+		  this.findChildByKeyNode(1);
+		  this.findChildByKeyNode(6);
+		  this.findChildByKeyNode(9);
+		  this.findChildByKeyNode(11);
 
   	}catch(e) {
 
@@ -129,7 +132,17 @@ export class AppComponent implements OnInit {
   }
 
   findChildByKeyNode(key : number) : void {
-  	//
+
+  	let searchNodeWithChild : NodeData[] = this.nodeList.filter((node, i) => {
+
+  		return node.key === key && node.child.length;
+  	});
+
+  	if(searchNodeWithChild.length) {
+  		console.log('find node['+key+'] result ok', searchNodeWithChild);
+  	} else {
+  		console.log('the node['+key+'] doest not have childnodes or not exists!');
+  	}
   }
 
 }
